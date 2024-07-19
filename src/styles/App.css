@@ -34,7 +34,7 @@ button {
   border: 1px solid #00246B;
   background-color: #CADCFC;
   border-radius: 8px;
-  font-weight: 700;
+  font-weight: 600;
 
   color: #00246B;
 
@@ -91,6 +91,12 @@ section {
 .actions {
   display: flex;
   justify-content: flex-end;
-  margin: 8px;
   gap: 8px;
+}
+
+.educationItem {
+  border: 1px solid gray;
+  padding: 8px;
+  border-radius: 8px;
+  border-color: #CADCFC;
 }

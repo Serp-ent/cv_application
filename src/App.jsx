@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import './styles/App.css'
 import './styles/SectionHeader.css'
 import { InputItem } from './components/InputItem'
@@ -11,7 +12,6 @@ function App() {
 
   return (
     <main>
-      <form>
         {
         /* TODO; 
         each section should contain button to save/edit fields
@@ -24,7 +24,6 @@ function App() {
             Submit
           </button>
         </div>
-      </form>
     </main>
   )
 }
@@ -74,8 +73,8 @@ function Credentials() {
 }
 
 function Education() {
-  const [education, setEducation] = useState([]);
-  const [educationItem, setEducationItem] = useState({
+  const [educationList, setEducationList] = useState([]);
+  const [newEducationItem, setNewEducationItem] = useState({
     schoolName: '',
     studyTitle: '',
     studyStart: '',
@@ -85,7 +84,7 @@ function Education() {
 
   const handleChange = (event) => {
     const { name, value } = event.target;
-    setEducationItem(prevState => ({
+    setNewEducationItem(prevState => ({
       ...prevState,
       [name]: value
     }))
@@ -93,12 +92,10 @@ function Education() {
 
   const addItem = () => {
     // TODO: check if all fields are filled and with correct data
-    console.log(`adding ${JSON.stringify(educationItem)} item`);
+    const newItem = { ...newEducationItem, id: crypto.randomUUID() };
+    setEducationList([...educationList, newItem]);
 
-    const newItem = { ...educationItem, id: crypto.randomUUID() };
-    setEducation([...education, newItem]);
-
-    setEducationItem({
+    setNewEducationItem({
       schoolName: "",
       studyTitle: "",
       studyStart: "",
@@ -107,24 +104,8 @@ function Education() {
     // reset input fields
   }
 
-  const educationList = education.map((item) => {
-    return (
-      <div key={item.id} style={{ border: '1px solid black' }}>
-        <h6>from {item.studyStart} to {item.studyEnd}</h6>
-        <h4>School Name {item.schoolName}</h4>
-        <h4>Study Title {item.studyTitle}</h4>
-        <div className='actions'>
-          <button className='itemActions'>
-            <img src={editIcon} className='icon' />
-          </button>
-          <button className='itemActions'>
-            <img src={trashIcon} className='icon' />
-          </button>
-
-        </div>
-      </div>
-    );
-
+  const EducationDOMlist = educationList.map((item) => {
+    return <EducationItem key={item.id} item={item} editable={editable}></EducationItem>
   });
 
   return (
@@ -132,46 +113,18 @@ function Education() {
       <div className="sectionHeader">
         <h3>Education Experience</h3>
         <button type='button' onClick={() => setEditable(!editable)}>
-          {editable ? 'View' : 'Edit'}
+          {editable ? 'Save' : 'Edit'}
         </button>
       </div>
-      {editable ? (
-        <>
-          {educationList}
-          <InputItem
-            label='School name'
-            name='schoolName'
-            onInput={handleChange}
-            value={educationItem.schoolName}
-          />
-          <InputItem
-            label='Title of study'
-            name='studyTitle'
-            onInput={handleChange}
-            value={educationItem.studyTitle}
-          />
-          <InputItem
-            label='Start of study'
-            name='studyStart'
-            type='date'
-            onInput={handleChange}
-            value={educationItem.studyStart}
-          />
-          <InputItem
-            label='End of study'
-            name='studyEnd'
-            type='date'
-            onInput={handleChange}
-            value={educationItem.studyEnd}
-          />
-          <div className='addNew'>
-            <button type='button' onClick={addItem}>+</button>
-          </div>
-        </>
-      ) : (
-        educationList
+      {EducationDOMlist}
+      {editable && (
+        <AddEducationItemForm
+          educationItem={newEducationItem}
+          handleChange={handleChange}
+          addItem={addItem}
+        />
       )}
-    </section>
+    </section >
   );
 }
 
@@ -188,6 +141,67 @@ function PreviousWork() {
         <button>+</button>
       </div>
     </section>
+  );
+}
+
+function EducationItem({ item, editable }) {
+  return (
+    <div className='educationItem'>
+      {item.studyEnd === '' ? (
+        <h6>since {item.studyStart}</h6>
+      ) : (
+        <h6>from {item.studyStart} to {item.studyEnd}</h6>
+      )}
+      <h4>School Name {item.schoolName}</h4>
+      <h4>Study Title {item.studyTitle}</h4>
+      {editable && (
+        <div className='actions'>
+          <button className='itemActions'>
+            <img src={editIcon} className='icon' />
+          </button>
+          <button className='itemActions'>
+            <img src={trashIcon} className='icon' />
+          </button>
+        </div>
+      )}
+    </div>
+  );
+
+}
+
+function AddEducationItemForm({ educationItem, handleChange, addItem }) {
+  return (
+    <form>
+      <InputItem
+        label='School name'
+        name='schoolName'
+        onInput={handleChange}
+        value={educationItem.schoolName}
+      />
+      <InputItem
+        label='Title of study'
+        name='studyTitle'
+        onInput={handleChange}
+        value={educationItem.studyTitle}
+      />
+      <InputItem
+        label='Start of study'
+        name='studyStart'
+        type='date'
+        onInput={handleChange}
+        value={educationItem.studyStart}
+      />
+      <InputItem
+        label='End of study'
+        name='studyEnd'
+        type='date'
+        onInput={handleChange}
+        value={educationItem.studyEnd}
+      />
+      <div className='addNew'>
+        <button type='button' onClick={addItem}>+</button>
+      </div>
+    </form>
   );
 }
 
