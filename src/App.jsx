@@ -1,5 +1,5 @@
-import { useState } from 'react'
-import './App.css'
+import './styles/App.css'
+import { InputItem } from './components/InputItem'
 
 function App() {
   // const [count, setCount] = useState(0)
@@ -7,6 +7,10 @@ function App() {
   return (
     <main>
       <form>
+        {
+        /* TODO; 
+        each section should contain button to save/edit fields
+        */}
         <section className='inputSection'>
           <h3>Credentials</h3>
           <InputItem name='First Name'></InputItem>
@@ -54,18 +58,6 @@ function App() {
       </p> */}
     </main>
   )
-}
-
-function InputItem({ name, type = 'text' }) {
-  if (!name) {
-    return;
-  }
-  return (
-    <label>{name + ': '}
-      <input type={type} />
-    </label>
-  );
-
 }
 
 export default App
