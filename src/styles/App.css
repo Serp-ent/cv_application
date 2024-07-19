@@ -15,12 +15,7 @@ main {
 
   height: 100%;
   flex-basis: 800px;
+  box-sizing: border-box;
 
   padding: 32px;
-}
-
-.inputSection {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
 }
