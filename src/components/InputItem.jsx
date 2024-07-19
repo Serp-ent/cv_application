@@ -1,6 +1,7 @@
 import "../styles/InputItem.css"
 
 export function InputItem({
+    label,
     name,
     type = 'text',
     onInput,
@@ -9,8 +10,8 @@ export function InputItem({
     return (
         <>
             <label>
-                <div>{name + ': '}</div>
-                <input type={type} onChange={onInput} value={value} />
+                <div>{label + ': '}</div>
+                <input name={name} type={type} onChange={onInput} value={value} />
             </label>
         </>
     );
