@@ -20,7 +20,7 @@ main {
   flex-basis: 800px;
   box-sizing: border-box;
 
-  padding: 32px;
+  padding: 32px 16px;
 }
 
 div.submit {
