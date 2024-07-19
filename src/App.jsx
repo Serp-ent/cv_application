@@ -3,6 +3,9 @@ import './styles/SectionHeader.css'
 import { InputItem } from './components/InputItem'
 import { useState } from 'react'
 
+import editIcon from './assets/editIcon.svg'
+import trashIcon from './assets/trashIcon.svg'
+
 function App() {
   // const [count, setCount] = useState(0)
 
@@ -110,6 +113,15 @@ function Education() {
         <h6>from {item.studyStart} to {item.studyEnd}</h6>
         <h4>School Name {item.schoolName}</h4>
         <h4>Study Title {item.studyTitle}</h4>
+        <div className='actions'>
+          <button className='itemActions'>
+            <img src={editIcon} className='icon' />
+          </button>
+          <button className='itemActions'>
+            <img src={trashIcon} className='icon' />
+          </button>
+
+        </div>
       </div>
     );
 
