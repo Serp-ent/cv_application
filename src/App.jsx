@@ -24,29 +24,13 @@ function App() {
           <SectionHeader title={'Work experience'}></SectionHeader>
           <PreviousWorkInput />
         </section>
+        <div className='submit'>
+          <button>
+            Submit
+          </button>
+        </div>
 
       </form>
-
-      {/* <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p> */}
     </main>
   )
 }
@@ -69,6 +53,9 @@ function EducationInput() {
       <InputItem name='Title of study'></InputItem>
       <InputItem name='start of study' type='date'></InputItem>
       <InputItem name='end of study' type='date'></InputItem>
+      <div className='addNew'>
+        <button>+</button>
+      </div>
     </>
   );
 }
@@ -81,6 +68,9 @@ function PreviousWorkInput() {
       <InputItem name='main responsibilities'></InputItem>
       <InputItem name='start of work' type='date'></InputItem>
       <InputItem name='end of work' type='date'></InputItem>
+      <div className='addNew'>
+        <button>+</button>
+      </div>
     </>
   );
 }

@@ -1,16 +1,22 @@
 .inputSection {
   display: flex;
   flex-direction: column;
-  gap: 4px;
+  gap: 8px;
+
+  margin: 24px 16px;
 }
 
 label {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
     justify-content: center;
     justify-items: center;
 }
 
+label div {
+    max-width: 200px;
+    width: 100%;
+}
 
 label input {
     width: 100%;
