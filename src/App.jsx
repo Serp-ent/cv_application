@@ -62,15 +62,19 @@ function Credentials() {
   }
 
   return (
-    <section className='inputSection'>
-      <div className="sectionHeader">
-        <h3>Credentials</h3>
-        <button type='button' onClick={() => setEditable(true)}>Edit</button>
+    <header>
+      <div className='sectionHeader'>
+        <h3>{credentials.firstName} {credentials.lastName}</h3>
+        <div>
+          <button type='button' onClick={() => setEditable(true)}>Edit</button>
+        </div>
       </div>
-      <h3>{credentials.firstName} {credentials.lastName}</h3>
-      <p>Address: {credentials.address}</p>
-      <p>Phone number: {credentials.phoneNumber}</p>
-    </section>
+
+      <div>
+        <p>Address: {credentials.address}</p>
+        <p>Phone number: {credentials.phoneNumber}</p>
+      </div>
+    </header >
   )
 }
 
@@ -127,14 +131,18 @@ function Education() {
     />
   });
 
+  const sectionName = (editable) ? "inputSection" : "result";
   return (
-    <section className='inputSection'>
+    <section className={sectionName}>
       <div className="sectionHeader">
         <h3>Education Experience</h3>
-        <button type='button' onClick={() => setEditable(!editable)}>
-          {editable ? 'Save' : 'Edit'}
-        </button>
+        <div>
+          <button type='button' onClick={() => setEditable(!editable)}>
+            {editable ? 'Save' : 'Edit'}
+          </button>
+        </div>
       </div>
+      
       {EducationDOMlist}
       {editable && (
         <EducationItemForm
@@ -224,8 +232,8 @@ function EducationItem({ item, editable, onRemove, onSave }) {
       ) : (
         <h6>from {item.studyStart} to {item.studyEnd}</h6>
       )}
-      <h4>School Name {item.schoolName}</h4>
-      <h4>Study Title {item.studyTitle}</h4>
+      <p>School Name: <span className='itemContent'>{item.schoolName}</span></p>
+      <p>Study Title: <span className='itemContent'>{item.studyTitle}</span></p>
       {editable && (
         <div className='actions'>
           <button className='itemActions'>

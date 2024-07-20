@@ -67,10 +67,8 @@ button:hover {
 }
 
 section {
-  border: 1px solid rgba(0, 0, 0, 0.1);
   padding: 8px;
   border-radius: 5px;
-  box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.1);
 }
 
 .icon {
@@ -99,10 +97,29 @@ section {
 }
 
 .educationItem {
-  border: 1px solid gray;
-  padding: 8px;
+  border: 1px solid #CADCFC;
+  padding: 16px;
   border-radius: 8px;
-  border-color: #CADCFC;
+
+}
+
+.educationItem h6 {
+  padding: 0;
+  margin: 4px;
+
+  color: gray;
+}
+
+.educationItem p {
+  padding: 0px;
+  margin: 4px;
+}
+
+.educationItem .itemContent {
+  font-weight: 600;
+  font-size: 16px;
+
+  text-transform: capitalize;
 }
 
 form {
@@ -118,4 +135,30 @@ form {
     flex-direction: column;
   }
 
+}
+
+header {
+  padding: 16px;
+}
+
+.sectionHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+header p {
+  padding: 0;
+  margin: 8px;
+  text-transform: capitalize;
+
+  color: rgb(82, 82, 82);
+}
+
+section.result {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+
+  margin: 24px 8px;
 }
