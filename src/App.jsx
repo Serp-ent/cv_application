@@ -106,8 +106,18 @@ function Education() {
     // reset input fields
   }
 
+  const removeItem = (id) => {
+    console.log(`Removing item with id = ${id}`);
+    setEducationList(prevList => prevList.filter(item => item.id !== id));
+  }
+
   const EducationDOMlist = educationList.map((item) => {
-    return <EducationItem key={item.id} item={item} editable={editable}></EducationItem>
+    return <EducationItem
+      key={item.id}
+      item={item}
+      editable={editable}
+      onRemove={() => removeItem(item.id)}>
+    </EducationItem>
   });
 
   return (
@@ -146,7 +156,7 @@ function PreviousWork() {
   );
 }
 
-function EducationItem({ item, editable }) {
+function EducationItem({ item, editable, onRemove }) {
   return (
     <div className='educationItem'>
       {item.studyEnd === '' ? (
@@ -161,7 +171,7 @@ function EducationItem({ item, editable }) {
           <button className='itemActions'>
             <img src={editIcon} className='icon' />
           </button>
-          <button className='itemActions'>
+          <button className='itemActions' onClick={onRemove}>
             <img src={trashIcon} className='icon' />
           </button>
         </div>
