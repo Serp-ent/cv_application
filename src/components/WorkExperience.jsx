@@ -1,6 +1,8 @@
 import { useState } from "react";
 import { InputItem } from "./InputItem";
 
+import '../styles/WorkExperience.css'
+
 import editIcon from '../assets/editIcon.svg'
 import trashIcon from '../assets/trashIcon.svg'
 
@@ -243,19 +245,28 @@ function ResponsibilitiesInput({ list, addItem }) {
     }
 
     const items = list.map(resp => (
-        <li key={resp.id}>
+        <li key={resp.id} >
             {resp.value}
-            <button>Edit</button>
-            <button>Remove</button>
+
+            <div className="resp-actions">
+                <button onClick={() => {
+                    console.log(`editing responsibility`);
+                }}>Edit</button>
+                <button>Remove</button>
+            </div>
         </li>
     ));
 
     return (
-        <div>
-            <p>Responsibilities:</p>
-            <ul>{items}</ul>
-            <input onChange={handleChange} value={respItem}></input>
-            <button type='button' onClick={handleAddItem}>Add</button>
-        </div>
+        <div className="responsibilities">
+            <div className="add-resp-item">
+                <div>Responsibilities:</div>
+                <div className="resp-input">
+                    <input onChange={handleChange} value={respItem}></input>
+                    <button type='button' onClick={handleAddItem}>Add</button>
+                </div>
+            </div>
+            <ul className="resp-list">{items}</ul>
+        </div >
     );
 }

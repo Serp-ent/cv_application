@@ -1,0 +1,62 @@
+.add-resp-item {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    justify-items: center;
+
+    gap: 16px;
+}
+
+.resp-input {
+    display: flex;
+    gap: 4px;
+    min-width: 200px;
+}
+
+.resp-actions {
+    display: flex;
+    gap: 4px;
+    flex-wrap: wrap;
+}
+
+.resp-input input {
+    width: 100%;
+    max-width: 200px;
+}
+
+.add-resp-item button,
+.resp-list button {
+    font-size: 0.6rem;
+    padding: 4px 8px;
+}
+
+@media (max-width: 400px) {
+    .add-resp-item {
+        flex-direction: column;
+        gap: 0;
+        align-items: flex-start;
+        /* align-items: flex-start; */
+    }
+
+
+    .resp-list li {
+        width: 100%;
+    }
+
+    ul.resp-list {
+        padding: 0;
+    }
+}
+
+ul.resp-list {
+    margin: 8px;
+}
+
+
+.resp-list li {
+    display: flex;
+    align-items: center;
+
+    justify-content: space-between;
+    margin: 4px;
+}
