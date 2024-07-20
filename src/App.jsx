@@ -115,9 +115,15 @@ function Education() {
     setEducationList(prevList => prevList.filter(item => item.id !== id));
   }
 
+  // const updateItem = (updatedItem) => {
+  //   const updatedList = educationList.map(item => {
+  //     return item.id === updatedItem.id ? updatedItem : item;
+  //   });
+  //   setEducationList(updatedList);
+  // }
   const updateItem = (updatedItem) => {
     setEducationList(prevList => {
-      return prevList.map(item => (item.id === updatedItem.id ? updatedItem : item.id));
+      return prevList.map(item => (item.id === updatedItem.id ? updatedItem : item));
     })
   }
 
