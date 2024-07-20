@@ -12,18 +12,18 @@ function App() {
 
   return (
     <main>
-        {
+      {
         /* TODO; 
         each section should contain button to save/edit fields
         */}
-        <Credentials />
-        <Education />
-        <PreviousWork />
-        <div className='submit'>
-          <button>
-            Submit
-          </button>
-        </div>
+      <Credentials />
+      <Education />
+      <PreviousWork />
+      <div className='submit'>
+        <button>
+          Submit
+        </button>
+      </div>
     </main>
   )
 }
@@ -51,10 +51,12 @@ function Credentials() {
           <h3>Credentials</h3>
           <button type='button' onClick={() => setEditable(false)}>save</button>
         </div>
-        <InputItem label="First Name" name='firstName' onInput={handleChange} value={credentials.firstName}></InputItem>
-        <InputItem label='Last Name' name='lastName' onInput={handleChange} value={credentials.lastName}></InputItem>
-        <InputItem label='Address' name="address" onInput={handleChange} value={credentials.address}></InputItem>
-        <InputItem label='Phone' name="phoneNumber" onInput={handleChange} value={credentials.phoneNumber}></InputItem>
+        <form>
+          <InputItem label="First Name" name='firstName' onInput={handleChange} value={credentials.firstName}></InputItem>
+          <InputItem label='Last Name' name='lastName' onInput={handleChange} value={credentials.lastName}></InputItem>
+          <InputItem label='Address' name="address" onInput={handleChange} value={credentials.address}></InputItem>
+          <InputItem label='Phone' name="phoneNumber" onInput={handleChange} value={credentials.phoneNumber}></InputItem>
+        </form>
       </section>
     );
   }

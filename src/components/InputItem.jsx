@@ -9,7 +9,7 @@ export function InputItem({
 }) {
     return (
         <>
-            <label>
+            <label className="formGroup">
                 <div>{label + ': '}</div>
                 <input name={name} type={type} onChange={onInput} value={value} />
             </label>
