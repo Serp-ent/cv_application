@@ -15,14 +15,24 @@ label {
     grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
     justify-content: center;
     justify-items: center;
+    align-items: center;
 }
 
 label div {
-    max-width: 100px;
+    max-width: 110px;
     width: 100%;
 }
 
 label input {
     width: 100%;
     max-width: 200px;
+}
+
+
+@media (max-width: 400px) {
+  .formGroup {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
 }

@@ -130,13 +130,6 @@ form {
   padding: 16px;
 }
 
-@media (max-width: 400px) {
-  .formGroup {
-    flex-direction: column;
-  }
-
-}
-
 header {
   padding: 16px;
 }
@@ -161,4 +154,17 @@ section.result {
   gap: 8px;
 
   margin: 24px 8px;
+}
+
+.sectionHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  padding: 8px;
+}
+
+.sectionHeader h3 {
+  padding: 0;
+  margin: 0;
 }
