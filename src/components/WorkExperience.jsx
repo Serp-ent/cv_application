@@ -9,7 +9,7 @@ export function WorkExperience() {
     const [newWorkItem, setNewWorkItem] = useState({
         companyName: '',
         positionTitle: '',
-        Responsibilities: '',
+        responsibilities: [],
         startOfWork: '',
         endOfWork: ''
     });
@@ -23,6 +23,15 @@ export function WorkExperience() {
         }))
     };
 
+    const addRespItem = (item) => {
+        const newRespArray = {
+            ...newWorkItem, responsibilities:
+                [...newWorkItem.responsibilities, { value: item, id: crypto.randomUUID() }]
+        };
+        setNewWorkItem(newRespArray);
+    }
+
+
     const addItem = () => {
         // TODO: check if all fields are filled and with correct data
         const newItem = { ...newWorkItem, id: crypto.randomUUID() };
@@ -31,7 +40,7 @@ export function WorkExperience() {
         setNewWorkItem({
             companyName: '',
             positionTitle: '',
-            responsibilities: '',
+            responsibilities: [],
             startOfWork: '',
             endOfWork: ''
         });
@@ -77,6 +86,7 @@ export function WorkExperience() {
                     workItem={newWorkItem}
                     handleChange={handleChange}
                     addItem={addItem}
+                    addRespItem={addRespItem}
                 />
             )}
         </section >
@@ -102,6 +112,11 @@ function WorkItem({ item, editable, onRemove, onSave }) {
         toggleEdit();
     }
 
+    const ResponsibilitiesList = item.responsibilities.map(resp => (
+        <li key={resp.id}>{resp.value}</li>
+    ));
+
+
     if (isEditMode) {
         return (
             <form className='educationItem'>
@@ -117,12 +132,11 @@ function WorkItem({ item, editable, onRemove, onSave }) {
                     onInput={handleChange}
                     value={editedItem.positionTitle}
                 />
-                <InputItem
-                    label='Responsibilities'
-                    name='responsibilities'
-                    onInput={handleChange}
-                    value={editedItem.responsibilities}
-                />
+
+                {/* TODO */}
+                <ul>
+                    {ResponsibilitiesList}
+                </ul>
                 <InputItem
                     label='start of work'
                     name='startOfWork'
@@ -153,7 +167,9 @@ function WorkItem({ item, editable, onRemove, onSave }) {
             )}
             <p>Company Name: <span className='itemContent'>{item.companyName}</span></p>
             <p>Position Title: <span className='itemContent'>{item.positionTitle}</span></p>
-            <p>Responsibilities: <span className='itemContent'>{item.responsibilities}</span></p>
+            <ul>Responsibilities:
+                {ResponsibilitiesList}
+            </ul>
             {editable && (
                 <div className='actions'>
                     <button className='itemActions'>
@@ -169,10 +185,7 @@ function WorkItem({ item, editable, onRemove, onSave }) {
 
 }
 
-function WorkItemForm({ workItem, handleChange, addItem }) {
-    // responsibilities: '',
-    // startOfWork: '',
-    // endOfWork: ''
+function WorkItemForm({ workItem, handleChange, addItem, addRespItem }) {
     return (
         <form>
             <InputItem
@@ -187,12 +200,15 @@ function WorkItemForm({ workItem, handleChange, addItem }) {
                 onInput={handleChange}
                 value={workItem.positionTitle}
             />
-            <InputItem
+
+            <ResponsibilitiesInput list={workItem.responsibilities} addItem={addRespItem} />
+            {/* <InputItem
                 label='Responsibilities'
                 name='responsibilities'
                 onInput={handleChange}
                 value={workItem.responsibilities}
-            />
+            /> */}
+
             <InputItem
                 label='Start Of Work'
                 name='startOfWork'
@@ -211,5 +227,35 @@ function WorkItemForm({ workItem, handleChange, addItem }) {
                 <button type='button' onClick={addItem}>+</button>
             </div>
         </form>
+    );
+}
+
+function ResponsibilitiesInput({ list, addItem }) {
+    const [respItem, setRespItem] = useState('');
+
+    const handleChange = (event) => {
+        setRespItem(event.target.value);
+    }
+
+    const handleAddItem = () => {
+        addItem(respItem);
+        setRespItem('');
+    }
+
+    const items = list.map(resp => (
+        <li key={resp.id}>
+            {resp.value}
+            <button>Edit</button>
+            <button>Remove</button>
+        </li>
+    ));
+
+    return (
+        <div>
+            <p>Responsibilities:</p>
+            <ul>{items}</ul>
+            <input onChange={handleChange} value={respItem}></input>
+            <button type='button' onClick={handleAddItem}>Add</button>
+        </div>
     );
 }
