@@ -33,6 +33,16 @@ export function WorkExperience() {
         setNewWorkItem(newRespArray);
     }
 
+    const removeRespItem = (item) => {
+        const newResponsibilities = newWorkItem.responsibilities
+            .filter(resp => resp.id !== item.id);
+
+        const workWithNewRespArr = {
+            ...newWorkItem, responsibilities: newResponsibilities
+        };
+        setNewWorkItem(workWithNewRespArr);
+    }
+
 
     const addItem = () => {
         // TODO: check if all fields are filled and with correct data
@@ -89,6 +99,7 @@ export function WorkExperience() {
                     handleChange={handleChange}
                     addItem={addItem}
                     addRespItem={addRespItem}
+                    removeRespItem={removeRespItem}
                 />
             )}
         </section >
@@ -187,7 +198,7 @@ function WorkItem({ item, editable, onRemove, onSave }) {
 
 }
 
-function WorkItemForm({ workItem, handleChange, addItem, addRespItem }) {
+function WorkItemForm({ workItem, handleChange, addItem, addRespItem, removeRespItem }) {
     return (
         <form>
             <InputItem
@@ -203,7 +214,7 @@ function WorkItemForm({ workItem, handleChange, addItem, addRespItem }) {
                 value={workItem.positionTitle}
             />
 
-            <ResponsibilitiesInput list={workItem.responsibilities} addItem={addRespItem} />
+            <ResponsibilitiesInput list={workItem.responsibilities} addItem={addRespItem} removeItem={removeRespItem} />
             {/* <InputItem
                 label='Responsibilities'
                 name='responsibilities'
@@ -232,7 +243,7 @@ function WorkItemForm({ workItem, handleChange, addItem, addRespItem }) {
     );
 }
 
-function ResponsibilitiesInput({ list, addItem }) {
+function ResponsibilitiesInput({ list, addItem, removeItem }) {
     const [respItem, setRespItem] = useState('');
 
     const handleChange = (event) => {
@@ -249,10 +260,7 @@ function ResponsibilitiesInput({ list, addItem }) {
             {resp.value}
 
             <div className="resp-actions">
-                <button onClick={() => {
-                    console.log(`editing responsibility`);
-                }}>Edit</button>
-                <button>Remove</button>
+                <button type='button' onClick={() => removeItem(resp)}>Remove</button>
             </div>
         </li>
     ));
@@ -266,7 +274,8 @@ function ResponsibilitiesInput({ list, addItem }) {
                     <button type='button' onClick={handleAddItem}>Add</button>
                 </div>
             </div>
-            <ul className="resp-list">{items}</ul>
+            {list.length > 0 && <ul className="resp-list">{items}</ul>}
+
         </div >
     );
 }

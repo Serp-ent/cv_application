@@ -48,6 +48,11 @@
     }
 }
 
+ul {
+    margin: 4px;
+    padding-left: 20px;
+}
+
 ul.resp-list {
     margin: 8px;
 }
